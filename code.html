@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hoood - The Social Network for AI Prompts</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              green: '#1daf57',
+              light: '#f0fdf4',
+              dark: '#064e3b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="typography">@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap'); body { font-family: 'Plus Jakarta Sans', sans-serif; } .gradient-text { background: linear-gradient(135deg, #1daf57 0%, #064e3b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }</style>
+<style data-purpose="layout-utilities">
+    .card-shadow {
+      box-shadow: 0 10px 40px -10px rgba(29, 175, 87, 0.12);
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    .glass-dark {
+      background: rgba(6, 78, 59, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(29, 175, 87, 0.1);
+    }
+    .hero-glow {
+      background: radial-gradient(circle, rgba(29, 175, 87, 0.15) 0%, transparent 70%);
+    }
+    .btn-glow {
+      box-shadow: 0 0 30px rgba(29, 175, 87, 0.3);
+    }
+    .section-transition-top {
+      clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+    }
+    .section-transition-bottom {
+      clip-path: polygon(0 0, 100% 0, 100% 95%, 0 100%);
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 overflow-x-hidden">
+<!-- BEGIN: Navigation -->
+<nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+<div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-brand-green rounded-lg flex items-center justify-center">
+<span class="text-white font-bold">H</span>
+</div>
+<span class="font-extrabold text-xl tracking-tight text-brand-green">HOOOD</span>
+</div>
+<div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
+<a class="hover:text-brand-green transition-colors" href="#">Features</a>
+<a class="hover:text-brand-green transition-colors" href="#">How it works</a>
+<a class="hover:text-brand-green transition-colors" href="#">Sample Prompts</a>
+</div>
+<button class="bg-brand-green text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-brand-dark transition-all btn-glow">
+        Log In
+      </button>
+</div>
+</nav>
+<!-- END: Navigation -->
+<main class="pt-16">
+<!-- BEGIN: Hero Section -->
+<section class="relative py-20 lg:py-32 hero-gradient overflow-hidden" data-purpose="hero-section" id="hero" style="background-image: radial-gradient(circle at 2px 2px, rgba(29, 175, 87, 0.08) 1px, transparent 0); background-size: 48px 48px;">
+<div class="max-w-5xl mx-auto px-6 text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold text-brand-dark mb-6 leading-tight tracking-tight font-black tracking-tight">Unlock the Power <br/> <span class="text-brand-green">of Every Prompt.</span></h1>
+<p class="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto mb-12">Join the world's most intelligent social network for AI engineering. Discover, remix, and deploy high-performance prompts in seconds.</p>
+<!-- Mockup Visuals -->
+<div class="relative mt-20 flex justify-center items-end gap-4 md:gap-8"><div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] hero-glow pointer-events-none -z-10"></div>
+<!-- Background Avatars (Blurred) -->
+<div class="absolute inset-0 flex justify-between items-center opacity-20 pointer-events-none px-4">
+<img alt="User" class="rounded-full w-24 h-24 blur-sm translate-y-[-100px]" src="{{DATA:IMAGE:IMAGE_4}}"/>
+<img alt="User" class="rounded-full w-24 h-24 blur-sm translate-y-[-50px]" src="{{DATA:IMAGE:IMAGE_4}}"/>
+<img alt="User" class="rounded-full w-24 h-24 blur-sm translate-y-[-150px]" src="{{DATA:IMAGE:IMAGE_4}}"/>
+</div>
+<!-- Phone Mockups -->
+<div class="w-1/4 md:w-64 transform -rotate-12 translate-y-12">
+<img alt="Phone Interface Left" class="rounded-[2rem] shadow-2xl border-4 border-white object-cover aspect-[9/19] scale-150" src="{{DATA:IMAGE:IMAGE_6}}"/>
+</div>
+<div class="w-1/3 z-10 md:w-96 scale-110">
+<img alt="Phone Interface Center" class="rounded-[2.5rem] shadow-2xl border-8 border-gray-900 object-cover aspect-[9/19]" src="{{DATA:IMAGE:IMAGE_4}}"/>
+</div><div class="w-1/4 md:w-64 transform rotate-12 translate-y-12">
+<img alt="Phone Interface Right" class="rounded-[2rem] shadow-2xl border-4 border-white object-cover aspect-[9/19] scale-150" src="{{DATA:IMAGE:IMAGE_6}}"/>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Value Prop -->
+<section class="py-24 bg-white pb-32" data-purpose="value-prop">
+<div class="max-w-6xl mx-auto px-6">
+<div class="flex flex-col md:flex-row items-center gap-12">
+<div class="md:w-1/2">
+<span class="text-brand-green font-bold uppercase tracking-widest text-sm">What is Hoood</span>
+<h2 class="text-4xl font-bold text-brand-dark mt-4 mb-6 tracking-tight">The Easiest way to use AI.</h2>
+<p class="text-gray-600 leading-relaxed text-lg">
+              Hoood is a simple library of high-quality prompts that work instantly. We've done the testing so you don't have to. It removes the difficulty of starting from a blank screen by offering ready-made prompts that already work with tools like ChatGPT, Claude, and Gemini.
+            </p>
+</div>
+<div class="md:w-1/2 flex justify-center"><div class="relative w-full h-64 bg-brand-green/5 rounded-3xl border border-brand-green/10 flex items-center justify-center overflow-hidden"><div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#1daf57 1px, transparent 0); background-size: 20px 20px;"></div><div class="w-32 h-32 bg-brand-green/20 rounded-full blur-3xl"></div><div class="relative z-10 w-16 h-16 bg-white rounded-2xl shadow-xl flex items-center justify-center text-brand-green font-bold text-2xl border border-brand-green/10">AI</div></div></div>
+</div>
+</div>
+</section>
+<!-- END: Value Prop -->
+<!-- BEGIN: How It Works -->
+<section class="py-32 bg-brand-light/40 relative z-10" data-purpose="how-it-works">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<h2 class="text-3xl font-bold text-brand-dark mb-4 tracking-tight">How it works</h2>
+<p class="text-gray-500 mb-16">Three simple steps to better AI results.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Step 1 -->
+<div class="p-10 rounded-3xl card-shadow border border-brand-green/10 flex flex-col items-center hover:shadow-[0_20px_50px_-12px_rgba(29,175,87,0.2)] transition-all duration-300 transform hover:-translate-y-2 glass">
+<div class="w-24 h-24 bg-brand-green/10 rounded-full flex items-center justify-center mb-8 shadow-[inset_0_0_15px_rgba(29,175,87,0.2)]">
+<svg class="w-10 h-10 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-3 tracking-tight">Browse</h3>
+<p class="text-gray-500 text-sm">Explore a global library of verified, high-impact prompts for every AI model.</p>
+</div>
+<!-- Step 2 -->
+<div class="p-10 rounded-3xl card-shadow border border-brand-green/10 flex flex-col items-center hover:shadow-[0_20px_50px_-12px_rgba(29,175,87,0.2)] transition-all duration-300 transform hover:-translate-y-2 glass">
+<div class="w-24 h-24 bg-brand-green/10 rounded-full flex items-center justify-center mb-8 shadow-[inset_0_0_15px_rgba(29,175,87,0.2)]">
+<svg class="w-10 h-10 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-3 tracking-tight">Copy</h3>
+<p class="text-gray-500 text-sm">One-click integration. Instantly bring top-tier AI logic into your workflow.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-10 rounded-3xl card-shadow border border-brand-green/10 flex flex-col items-center hover:shadow-[0_20px_50px_-12px_rgba(29,175,87,0.2)] transition-all duration-300 transform hover:-translate-y-2 glass">
+<div class="w-24 h-24 bg-brand-green/10 rounded-full flex items-center justify-center mb-8 shadow-[inset_0_0_15px_rgba(29,175,87,0.2)]">
+<svg class="w-10 h-10 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold mb-3 tracking-tight">Paste</h3>
+<p class="text-gray-500 text-sm">Get perfect results every time. No more guessing, just pure productivity.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: How It Works -->
+<!-- BEGIN: Why Use Hoood -->
+<section class="py-24 bg-white section-transition-top" data-purpose="features">
+<div class="max-w-4xl mx-auto px-6">
+<h2 class="text-3xl font-bold text-brand-dark text-center mb-16 tracking-tight">Why use Hoood?</h2>
+<div class="space-y-6">
+<!-- Feature 1 -->
+<div class="flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r from-brand-light to-transparent border border-brand-green/5 hover:border-brand-green/20 transition-all glass-dark">
+<div class="flex-shrink-0 w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center">
+<svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="text-lg font-bold text-brand-dark tracking-tight">Seamless Integration</h4>
+<p class="text-gray-500 text-sm">Stop wasting time selecting text. One tap, and you're ready to create.</p>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r from-brand-light to-transparent border border-brand-green/5 translate-x-4 hover:border-brand-green/20 transition-all glass-dark">
+<div class="flex-shrink-0 w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center">
+<svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="text-lg font-bold text-brand-dark tracking-tight">Human-Verified Excellence</h4>
+<p class="text-gray-500 text-sm">Every prompt in our library is tested for accuracy and impact before it reaches you.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r from-brand-light to-transparent border border-brand-green/5 translate-x-8 hover:border-brand-green/20 transition-all glass-dark">
+<div class="flex-shrink-0 w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center">
+<svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="text-lg font-bold text-brand-dark tracking-tight">Future-Proof Tech</h4>
+<p class="text-gray-500 text-sm">Fully optimized for ChatGPT, Claude, Gemini, and the next generation of LLMs.</p>
+</div>
+</div>
+<!-- Feature 4 -->
+<div class="flex items-center gap-6 p-6 rounded-2xl bg-gradient-to-r from-brand-light to-transparent border border-brand-green/5 translate-x-12 hover:border-brand-green/20 transition-all glass-dark">
+<div class="flex-shrink-0 w-16 h-16 bg-white rounded-xl shadow-sm flex items-center justify-center">
+<svg class="w-8 h-8 text-brand-green" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="text-lg font-bold text-brand-dark tracking-tight">Zero Learning Curve</h4>
+<p class="text-gray-500 text-sm">Master AI prompting without the steep technical barrier. Just pick and go.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Why Use Hoood -->
+<!-- BEGIN: Built For Everyone -->
+<section class="py-24 bg-gradient-to-b from-white to-brand-light/30 pb-32" data-purpose="audience-segments">
+<div class="max-w-6xl mx-auto px-6 text-center">
+<h2 class="text-3xl font-bold text-brand-dark mb-16 tracking-tight">Built for everyone</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+<!-- Creators -->
+<div class="flex flex-col items-center glass p-6 rounded-[2.5rem] border border-brand-green/10">
+<div class="w-full aspect-[4/5] overflow-hidden rounded-3xl mb-6 shadow-lg shadow-2xl border-4 border-white">
+<img alt="Creators Portrait" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPBpCC8pqBcB-mIPn9jydtABMWCkmnPDP8EGN5W9S10KtzwJ3PExG5g49vGPtSbkNWRTUlZwQsW015DfD9DHMglU68M2mLT-14l92uCwq_wmhabznpEVrpWXVb35u1i2BLGcZfvQKsP3TvfEyb1mmf1hmmGu_EWA1dBPW3P6jkGHGziAmpks5kxGeuaboffFyAl4WtLxnPW92etkRgUyPDc662j1C2pytgeiz4xAWQvCYfPnjPAKwojos2w6Tmo4Zhho3NlcezN0M"/>
+</div>
+<h4 class="text-xl font-bold text-brand-dark mb-2 tracking-tight">Creators</h4>
+<p class="text-gray-500 text-sm px-4">Supercharge your creative output with inspiration that works.</p>
+</div>
+<!-- Students -->
+<div class="flex flex-col items-center glass p-6 rounded-[2.5rem] border border-brand-green/10">
+<div class="w-full aspect-[4/5] overflow-hidden rounded-3xl mb-6 shadow-lg shadow-2xl border-4 border-white">
+<img alt="Students Portrait" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9O6eGpDVrrLtk-4HHw--gXe6PVCbc33K91L1xY6RfNvWpLQ5O7jGLFoAmocv6LoZidCCoP1EtFseyd18cYVBkI-7wHqQ4meNI-ZDM5q1SOFnguKoyGmYGYmHq5jOsOMBc86txqGh9ASA9O1cHDPzwNZ0Qk1rKKHSpcu81lZ4m23tw4blNaztkT1u3PUwtvKOagBNzzmXM_ZfB4jRsHGcMzwm0nlhfJjZgAV4rC2QC98m2tazLMhkV7YAd8WNOyG6NTeSvOkX0_Ww"/>
+</div>
+<h4 class="text-xl font-bold text-brand-dark mb-2 tracking-tight">Students</h4>
+<p class="text-gray-500 text-sm px-4">Learn faster and research deeper with optimized academic prompts.</p>
+</div>
+<!-- Professionals -->
+<div class="flex flex-col items-center glass p-6 rounded-[2.5rem] border border-brand-green/10">
+<div class="w-full aspect-[4/5] overflow-hidden rounded-3xl mb-6 shadow-lg shadow-2xl border-4 border-white">
+<img alt="Professionals Portrait" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkdIWfjsMeGu9W2wRDDkJCQK_J-SKOs4w-UfTZnc7Ls0L0FlMKdBZ4PFCoduH8iGKRw8-XccfNEvQI8MWCmMF7hgGCPEeMEudHhhbwUX7jt_ymdbU8DjkizQYRYDK7L_sYSEkPkc1np5Xl0waIa9wY0SPf8GyrjEvYIT-tyrG0r7K2wOu9KLUX82wpfmTLdhMlwxyAlxCwKUwmqCwJjFuNWevl5hJEAmh9XVrz37fEYwJPGDyqmufY5MXYWIBAfOIPERh_OzONSYM"/>
+</div>
+<h4 class="text-xl font-bold text-brand-dark mb-2 tracking-tight">Professionals</h4>
+<p class="text-gray-500 text-sm px-4">Automate your daily grind and reclaim your time with enterprise-grade logic.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Built For Everyone -->
+<!-- BEGIN: Footer/CTA -->
+<section class="py-32 text-center bg-gradient-to-b from-white to-brand-light/50" data-purpose="cta-footer">
+<div class="max-w-4xl mx-auto px-6">
+<h2 class="text-4xl md:text-5xl font-extrabold text-brand-dark mb-10 leading-tight tracking-tight text-6xl">Stop Guessing. Start Prompting. <br/> <span class="text-brand-green text-4xl block mt-4">Join 50,000+ Innovators.</span></h2>
+<button class="bg-brand-green text-white px-10 py-5 rounded-full text-lg font-bold shadow-xl shadow-brand-green/20 hover:scale-105 hover:bg-brand-dark transition-all btn-glow">Explore Prompts</button>
+<div class="mt-32 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-brand-green rounded flex items-center justify-center">
+<span class="text-white text-[10px] font-bold">H</span>
+</div>
+<span class="font-bold text-brand-green uppercase">Hoood</span>
+</div>
+<div class="flex gap-8">
+<a class="hover:text-brand-green" href="#">About</a>
+<a class="hover:text-brand-green" href="#">Design</a>
+<a class="hover:text-brand-green" href="#">Privacy</a>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Footer/CTA -->
+</main>
+</body></html>
