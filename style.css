@@ -11,18 +11,35 @@
     transform: translateY(0);
 }
 
+/* Staggered Reveal Delays */
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+
+.reveal-delay-3 {
+    transition-delay: 0.3s;
+}
+
+.reveal-delay-4 {
+    transition-delay: 0.4s;
+}
+
 /* Navbar Blur on Scroll */
 .nav-glass {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(15px) !important;
-    -webkit-backdrop-filter: blur(15px) !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Custom Selection Color */
 ::selection {
-    background-color: rgba(16, 185, 129, 0.2);
-    color: #064e3b;
+    background-color: rgba(16, 185, 129, 0.3);
+    color: #ffffff;
 }
 
 /* Smooth Scrolling */
@@ -30,20 +47,103 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Glassmorphism utility for sections if needed */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.4);
+/* Dark Mode Overrides */
+body {
+    background-color: #050505;
+    color: #e2e8f0;
+}
+
+/* Futuristic Transitions */
+.futuristic-card {
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-/* Image Hover Effects */
-.hover-perspective {
-    transition: transform 0.5s ease;
+.futuristic-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(16, 185, 129, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.1);
 }
 
-.hover-perspective:hover {
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+/* Neon Glow Effects */
+.glow-text {
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.glow-border {
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+/* Aurora Background Animation */
+.aurora-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -20;
+    overflow: hidden;
+    background: #050505;
+}
+
+.aurora-blob {
+    position: absolute;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(80px);
+    animation: auroraRotate 20s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    top: -10%;
+    left: -10%;
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    bottom: -10%;
+    right: -10%;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
+    animation-delay: -5s;
+}
+
+@keyframes auroraRotate {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(10%, 10%) rotate(90deg);
+    }
+}
+
+/* Button Refinement */
+.btn-premium {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-premium::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.btn-premium:hover::after {
+    left: 100%;
+    top: 100%;
 }
 
 /* Logo Animations */
@@ -78,39 +178,20 @@ html {
     }
 }
 
-/* Futuristic Enhancements */
-.glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-}
-
-.neon-glow {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3),
-        0 0 40px rgba(16, 185, 129, 0.1);
-}
-
-.glow-hover:hover {
-    box-shadow: 0 0 30px rgba(16, 185, 129, 0.4),
-        0 0 60px rgba(16, 185, 129, 0.2);
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #f8fafc;
+    background: #0a0a0a;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #e2e8f0;
-    border-radius: 5px;
+    background: #2d2d2d;
+    border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #cbd5e1;
+    background: #3d3d3d;
 }
