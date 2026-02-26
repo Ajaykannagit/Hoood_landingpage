@@ -79,11 +79,11 @@ window.addEventListener('scroll', () => {
     if (blob1) blob1.style.transform = `translate(${scrolled * 0.05}px, ${scrolled * 0.05}px)`;
     if (blob2) blob2.style.transform = `translate(-${scrolled * 0.05}px, -${scrolled * 0.05}px)`;
 
-    // Hero Content Parallax
+    // Hero Content Parallax (Optimized to stay visible)
     const heroContent = document.querySelector('#hero .max-w-6xl');
     if (heroContent) {
         heroContent.style.transform = `translateY(${scrolled * 0.15}px)`;
-        heroContent.style.opacity = 1 - (scrolled / 700);
+        heroContent.style.opacity = Math.max(0.1, 1 - (scrolled / 1000));
     }
 });
 
