@@ -178,6 +178,33 @@ body {
     }
 }
 
+/* Logo Orbit Animation */
+.group:hover .logo-dot {
+    animation: logoOrbit 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group:hover .dot-1 {
+    animation-delay: 0s;
+}
+
+.group:hover .dot-2 {
+    animation-delay: -1.33s;
+}
+
+.group:hover .dot-3 {
+    animation-delay: -2.66s;
+}
+
+@keyframes logoOrbit {
+    0% {
+        transform: rotate(0deg) translateX(5px) rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(5px) rotate(-360deg);
+    }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
@@ -194,4 +221,156 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #3d3d3d;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: rgba(16, 185, 129, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
+}
+
+.custom-cursor.active {
+    width: 60px;
+    height: 60px;
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.8);
+}
+
+/* Terminal Component */
+.terminal-window {
+    background: #0d1117;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    font-family: 'Fira Code', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #161b22;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-body {
+    padding: 20px;
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.prompt-text {
+    color: #10b981;
+}
+
+.typing-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    background: #10b981;
+    margin-left: 5px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Waitlist Styles */
+.waitlist-input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.waitlist-input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(16, 185, 129, 0.5);
+    outline: none;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+/* Text Morphing */
+.morph-text {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.morph-text.exit {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.morph-text.enter {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Glassmorphism Shimmer */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+    .custom-cursor {
+        display: none;
+    }
+
+    .btn-premium {
+        transform: none !important;
+    }
+
+    #terminal-showcase {
+        padding: 40px 0;
+    }
+}
+
+@media (hover: none) {
+    .custom-cursor {
+        display: none;
+    }
 }
