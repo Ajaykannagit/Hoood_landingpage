@@ -211,13 +211,83 @@ const terminalObserver = new IntersectionObserver((entries) => {
 const terminal = document.querySelector('.terminal-window');
 if (terminal) terminalObserver.observe(terminal);
 
-// Neural Grid Background Logic
+// Counter Animation Logic
+const animateCounters = () => {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    counters.forEach(counter => {
+        const updateCount = () => {
+            const target = +counter.getAttribute('data-target');
+            const count = +counter.innerText.replace(/[^0-9]/g, '');
+            const suffix = counter.getAttribute('data-suffix') || '';
+            const inc = target / speed;
+
+            if (count < target) {
+                counter.innerText = Math.ceil(count + inc).toLocaleString() + suffix;
+                setTimeout(updateCount, 1);
+            } else {
+                counter.innerText = target.toLocaleString() + suffix;
+            }
+        };
+        updateCount();
+    });
+};
+
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.getElementById('stats');
+if (statsSection) statsObserver.observe(statsSection);
+
+// Enhanced Magnetic Follow for Cards
+document.querySelectorAll('.futuristic-card').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        // Create a spotlight effect
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 25;
+        const rotateY = (centerX - x) / 25;
+
+        card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
+        card.style.boxShadow = `${-rotateY * 2}px ${rotateX * 2}px 30px rgba(16, 185, 129, 0.2)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+        card.style.boxShadow = '';
+    });
+});
+
+// Optimization: Single resize handler
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        if (typeof init === 'function') init();
+    }, 250);
+});
+
+// Initialize Neural Grid Background Logic
 const canvas = document.getElementById('neural-grid');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
-    const particleCount = 60;
+    const particleCount = window.innerWidth < 768 ? 30 : 60; // Performance optimization for mobile
     const maxDistance = 150;
     let mouseX = 0;
     let mouseY = 0;
@@ -231,8 +301,8 @@ if (canvas) {
         constructor() {
             this.x = Math.random() * width;
             this.y = Math.random() * height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
         }
 
         update() {
@@ -244,9 +314,9 @@ if (canvas) {
         }
 
         draw() {
-            ctx.fillStyle = 'rgba(16, 185, 129, 0.5)';
+            ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
             ctx.beginPath();
-            ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
             ctx.fill();
         }
     }
@@ -266,13 +336,12 @@ if (canvas) {
             p.update();
             p.draw();
 
-            // Connect to mouse
             const dx = p.x - mouseX;
             const dy = p.y - mouseY;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
             if (distance < maxDistance) {
-                ctx.strokeStyle = `rgba(16, 185, 129, ${1 - distance / maxDistance})`;
+                ctx.strokeStyle = `rgba(16, 185, 129, ${(1 - distance / maxDistance) * 0.6})`;
                 ctx.lineWidth = 0.5;
                 ctx.beginPath();
                 ctx.moveTo(p.x, p.y);
@@ -280,14 +349,13 @@ if (canvas) {
                 ctx.stroke();
             }
 
-            // Connect to other particles
             particles.forEach(p2 => {
                 const dx2 = p.x - p2.x;
                 const dy2 = p.y - p2.y;
                 const distance2 = Math.sqrt(dx2 * dx2 + dy2 * dy2);
 
                 if (distance2 < maxDistance) {
-                    ctx.strokeStyle = `rgba(16, 185, 129, ${(1 - distance2 / maxDistance) * 0.2})`;
+                    ctx.strokeStyle = `rgba(16, 185, 129, ${(1 - distance2 / maxDistance) * 0.15})`;
                     ctx.lineWidth = 0.5;
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
@@ -300,7 +368,6 @@ if (canvas) {
         requestAnimationFrame(animate);
     }
 
-    window.addEventListener('resize', resize);
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
