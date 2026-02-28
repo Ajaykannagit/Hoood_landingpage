@@ -9,17 +9,30 @@
 ### 🌌 Interactive Neural Grid
 A custom, high-performance Canvas-based background that reacts to mouse movement, visually representing the interconnected nature of AI logic.
 
+### 📼 Animated Multi-Step Flow
+A premium, horizontal stepper experience that guides users through the Hoood ecosystem with fluid transitions and real-time progress tracking.
+
+### 📂 Interactive 3D Folder
+A tactile, glassmorphism-based folder component in the discovery flow. Includes:
+- **3D Opening Animation**: Smoothly transitions to reveal layered content.
+- **Layered Paper Spreading**: Interactive papers that fan out upon opening.
+- **Mouse Parallax**: Components react to cursor movement for a sense of physical depth.
+
+### 🥞 Scroll-Stacking Interface
+A vertical stacked-card layout for trending prompts. Cards pin and scale dynamically as you scroll, creating a cinematic, layered storytelling effect.
+
 ### 💻 Real-time Terminal Showcase
 An interactive terminal experience that demonstrates logic execution and prompt optimization in real-time with smooth typing animations.
 
 ### 🧲 Advanced Micro-interactions
 - **Custom Futuristic Cursor**: A dynamic, glowing cursor that reacts to interactive elements.
-- **Magnetic UI Elements**: Buttons and navigation links that possess a magnetic "pull" effect for a premium user experience.
-- **Logo Orbit System**: A unique branding animation where logic dots orbit the Hoood icon on hover.
+- **Magnetic UI Elements**: Buttons and navigation links that possess a magnetic "pull" effect.
+- **Logo Orbit System**: Branded logic dots orbit the Hoood icon on hover.
+- **Floating Visuals**: Model logos (OpenAI, Anthropic, etc.) possess a subtle, floating motion.
 
 ### 📐 Optimized Flow & Navigation
+- **Contextual Imagery**: High-quality, visually relevant assets for Technology, Productivity, and Analytics.
 - **Scroll Progress Indicator**: A sleek indicator tracking reading progress.
-- **Compact & Efficient UI**: A condensed footer and optimized section layouts for maximum scannability.
 - **Mobile-First Design**: Fully responsive across all devices with touch-optimized interactions.
 
 ## 🛠️ Technology Stack
