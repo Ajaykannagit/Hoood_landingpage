@@ -375,4 +375,152 @@ if (canvas) {
 
     init();
     animate();
+}// Animated Stepper Logic
+const stepperTrack = document.getElementById('stepper-track');
+const stepIndicators = document.querySelectorAll('.step-indicator');
+const stepPanes = document.querySelectorAll('.step-pane');
+const stepPrev = document.getElementById('step-prev');
+const stepNext = document.getElementById('step-next');
+const stepLineFill = document.querySelector('.stepper-line-fill');
+const stepOuter = document.querySelector('.stepper-content-outer');
+
+let currentStep = 0;
+const totalSteps = stepPanes.length;
+
+function updateStepper() {
+    // Update Indicators
+    stepIndicators.forEach((ind, idx) => {
+        ind.classList.toggle('active', idx === currentStep);
+        ind.classList.toggle('completed', idx < currentStep);
+    });
+
+    // Update Track Position
+    if (stepperTrack) {
+        stepperTrack.style.transform = `translateX(-${(currentStep * 100) / totalSteps}%)`;
+    }
+
+    // Update Line Fill
+    const progress = (currentStep / (totalSteps - 1)) * 100;
+    if (stepLineFill) stepLineFill.style.width = `${progress}%`;
+
+    // Update Panes
+    stepPanes.forEach((pane, idx) => {
+        pane.classList.toggle('active', idx === currentStep);
+    });
+
+    // Update Height
+    if (stepOuter) {
+        const activePane = stepPanes[currentStep];
+        stepOuter.style.height = activePane.offsetHeight + 'px';
+    }
+
+    // Update Controls
+    if (stepPrev) {
+        stepPrev.disabled = currentStep === 0;
+        stepPrev.style.opacity = currentStep === 0 ? '0.5' : '1';
+        stepPrev.style.cursor = currentStep === 0 ? 'not-allowed' : 'pointer';
+    }
+
+    if (stepNext) {
+        stepNext.innerHTML = currentStep === totalSteps - 1
+            ? 'Complete <i data-lucide="check" class="w-4 h-4 inline ml-2"></i>'
+            : 'Continue <i data-lucide="arrow-right" class="w-4 h-4 inline ml-2"></i>';
+        lucide.createIcons();
+    }
 }
+
+if (stepNext) {
+    stepNext.addEventListener('click', () => {
+        if (currentStep < totalSteps - 1) {
+            currentStep++;
+            updateStepper();
+        } else {
+            // "Complete" logic - maybe a confetti effect or success message
+            stepNext.innerHTML = "Success!";
+            stepNext.classList.add('bg-emerald-600');
+        }
+    });
+}
+
+if (stepPrev) {
+    stepPrev.addEventListener('click', () => {
+        if (currentStep > 0) {
+            currentStep--;
+            updateStepper();
+        }
+    });
+}
+
+stepIndicators.forEach((ind, idx) => {
+    ind.addEventListener('click', () => {
+        currentStep = idx;
+        updateStepper();
+    });
+});
+
+// Initialize stepper height
+window.addEventListener('load', () => {
+    setTimeout(updateStepper, 500);
+});
+
+// Interactive Folder Logic
+function openFolder() {
+    const folder = document.getElementById('main-folder');
+    if (folder) {
+        folder.classList.toggle('open');
+    }
+}
+
+// Folder Mouse Move Parallax
+const folder = document.getElementById('main-folder');
+if (folder) {
+    folder.addEventListener('mousemove', (e) => {
+        if (!folder.classList.contains('open')) return;
+        const rect = folder.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        const papers = folder.querySelectorAll('.folder-paper');
+        papers.forEach((paper, idx) => {
+            const factor = (idx + 1) * 10;
+            paper.style.transform = `translate(${x * factor}px, ${-40 * (idx + 1) + y * factor}px) rotate(${x * 5}deg)`;
+        });
+    });
+
+    folder.addEventListener('mouseleave', () => {
+        if (!folder.classList.contains('open')) return;
+        const papers = folder.querySelectorAll('.folder-paper');
+        papers.forEach((paper, idx) => {
+            paper.style.transform = '';
+        });
+    });
+}
+
+// Scroll Stack Effect Logic
+const scrollStackItems = document.querySelectorAll('.scroll-stack-card');
+window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+
+    scrollStackItems.forEach((card, idx) => {
+        const rect = card.getBoundingClientRect();
+        const cardTop = rect.top + scrollY;
+        const offset = scrollY - cardTop + (window.innerHeight * 0.15);
+
+        if (offset > 0) {
+            const scale = Math.max(0.85, 1 - (offset / 2000));
+            const brightness = Math.max(0.4, 1 - (offset / 1000));
+            card.style.transform = `scale(${scale}) translateY(${offset * 0.1}px)`;
+            card.style.filter = `brightness(${brightness})`;
+            card.style.opacity = Math.max(0.5, 1 - (offset / 1500));
+        } else {
+            card.style.transform = 'scale(1) translateY(0)';
+            card.style.filter = 'brightness(1)';
+            card.style.opacity = '1';
+        }
+    });
+});
+
+// Refine Model logos floating animation
+document.querySelectorAll('section.border-y img').forEach((img, idx) => {
+    img.style.animation = `float ${4 + idx}s ease-in-out infinite`;
+});
