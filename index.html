@@ -8,6 +8,27 @@
     <!-- SEO Meta Tags -->
     <meta name="description"
         content="Join the world's most intelligent social network for AI engineering. Discover, remix, and deploy high-performance prompts in seconds.">
+    <meta name="keywords"
+        content="AI, Prompt Engineering, Social Network, ChatGPT, Claude, Gemini, AI Prompts, Machine Learning">
+    <meta name="author" content="Hoood AI">
+
+    <!-- OpenGraph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://hoood.ai/">
+    <meta property="og:title" content="Hoood | The Social Network for AI Prompts">
+    <meta property="og:description"
+        content="Discover, remix, and deploy high-performance prompts in seconds. Join the elite circle of AI engineers.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://hoood.ai/">
+    <meta property="twitter:title" content="Hoood | The Social Network for AI Prompts">
+    <meta property="twitter:description"
+        content="Discover, remix, and deploy high-performance prompts in seconds. Join the elite circle of AI engineers.">
+    <meta property="twitter:image"
+        content="https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200">
 
     <!-- Tailwind CSS v3 CDN -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -112,7 +133,7 @@
                 <button
                     class="hidden sm:block text-sm font-bold text-gray-300 hover:text-brand-green transition-colors">Log
                     In</button>
-                <button
+                <button aria-label="Sign Up for Hoood"
                     class="bg-brand-green text-white px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest btn-premium hover:shadow-xl hover:shadow-brand-green/30 transition-all">
                     Sign Up
                 </button>
@@ -402,15 +423,15 @@
                         <div class="stepper-line">
                             <div class="stepper-line-fill"></div>
                         </div>
-                        <div class="step-indicator active" data-step="0">
+                        <div class="step-indicator active" data-step="0" role="button" aria-label="Step 1: Discover">
                             <div class="step-dot"></div>
                             <span class="step-label">Discover</span>
                         </div>
-                        <div class="step-indicator" data-step="1">
+                        <div class="step-indicator" data-step="1" role="button" aria-label="Step 2: Remix">
                             <div class="step-dot"></div>
                             <span class="step-label">Remix</span>
                         </div>
-                        <div class="step-indicator" data-step="2">
+                        <div class="step-indicator" data-step="2" role="button" aria-label="Step 3: Deploy">
                             <div class="step-dot"></div>
                             <span class="step-label">Deploy</span>
                         </div>
@@ -440,7 +461,8 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="relative group cursor-pointer" onclick="openFolder()">
+                                    <div class="relative group cursor-pointer" onclick="openFolder()" role="button"
+                                        aria-label="Open Interactive Logic Folder">
                                         <!-- Interactive Folder Component Placeholder -->
                                         <div class="folder-component" id="main-folder">
                                             <div class="folder-back"></div>
@@ -521,13 +543,13 @@
 
                     <!-- Stepper Controls -->
                     <div class="stepper-controls mt-12 flex justify-between items-center">
-                        <button
+                        <button aria-label="Previous Step"
                             class="px-8 py-3 rounded-full text-gray-500 font-bold hover:text-white transition-all opacity-50 cursor-not-allowed"
                             id="step-prev">
                             <i data-lucide="arrow-left" class="w-4 h-4 inline mr-2"></i> Back
                         </button>
                         <div class="flex gap-4">
-                            <button
+                            <button aria-label="Next Step"
                                 class="bg-white/10 hover:bg-white/20 text-white px-10 py-3 rounded-full font-bold transition-all"
                                 id="step-next">
                                 Continue <i data-lucide="arrow-right" class="w-4 h-4 inline ml-2"></i>
@@ -640,7 +662,7 @@
                         <div
                             class="relative mb-10 aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.05] futuristic-card">
                             <img alt="AI Influencers" class="w-full h-full object-cover transition-all duration-700"
-                                src="/C:/Users/user/.gemini/antigravity/brain/5d3f4423-9c57-4490-91ec-c365dc230306/hoood_audience_influencer_1772022951863.png" />
+                                src="https://images.unsplash.com/photo-1614741487278-75b331200dd9?auto=format&fit=crop&q=80&w=600" />
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent">
                             </div>
@@ -679,7 +701,7 @@
                         <div
                             class="relative mb-10 aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.05] futuristic-card">
                             <img alt="Digital Twin" class="w-full h-full object-cover transition-all duration-700"
-                                src="/C:/Users/user/.gemini/antigravity/brain/5d3f4423-9c57-4490-91ec-c365dc230306/hoood_audience_twin_1772023569983.png" />
+                                src="https://images.unsplash.com/photo-1620712943543-bcc4628c6757?auto=format&fit=crop&q=80&w=600" />
                             <div
                                 class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent">
                             </div>
