@@ -520,7 +520,80 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Refine Model logos floating animation
-document.querySelectorAll('section.border-y img').forEach((img, idx) => {
-    img.style.animation = `float ${4 + idx}s ease-in-out infinite`;
+// Live Activity Ticker Logic
+const tickerItems = [
+    { user: "@syntax-king", action: "deployed", logic: "Recursive Reasoner v4" },
+    { user: "@neural-ninja", action: "remixed", logic: "Chain-of-Thought Core" },
+    { user: "@logic-lord", action: "optimized", logic: "Python Speedster" },
+    { user: "@ai-architect", action: "deployed", logic: "Meta-Analytic Pro" },
+    { user: "@data-demon", action: "cloned", logic: "Efficiency Master" },
+    { user: "@code-crafter", action: "remixed", logic: "World Builder Pro" }
+];
+
+function initTicker() {
+    const tickerContainer = document.getElementById('live-ticker');
+    if (!tickerContainer) return;
+
+    // Create double items for seamless looping
+    const items = [...tickerItems, ...tickerItems];
+
+    tickerContainer.innerHTML = items.map(item => `
+        <div class="ticker-item">
+            <span class="opacity-50">${item.user}</span>
+            <strong class="mx-2">${item.action}</strong>
+            <span class="text-white">${item.logic}</span>
+            <span class="ml-4 opacity-20">•</span>
+        </div>
+    `).join('');
+}
+
+// Mind Graph Interaction
+document.querySelectorAll('.graph-node').forEach(node => {
+    node.addEventListener('mouseenter', () => {
+        const links = document.querySelectorAll('.graph-line');
+        links.forEach(link => {
+            if (link.getAttribute('x1') === node.getAttribute('cx') ||
+                link.getAttribute('x2') === node.getAttribute('cx')) {
+                link.classList.add('opacity-100');
+                link.style.strokeWidth = "2";
+            }
+        });
+    });
+
+    node.addEventListener('mouseleave', () => {
+        const links = document.querySelectorAll('.graph-line');
+        links.forEach(link => {
+            link.classList.remove('opacity-100');
+            link.style.strokeWidth = "1";
+        });
+    });
 });
+
+// Cinematic Staggered Text Reveal Logic
+function initStaggeredReveals() {
+    document.querySelectorAll('.reveal-stagger').forEach(el => {
+        const text = el.innerText;
+        el.innerHTML = '';
+        text.split(' ').forEach((word, i) => {
+            const span = document.createElement('span');
+            span.innerText = word + (i === text.split(' ').length - 1 ? '' : ' ');
+            span.style.transitionDelay = `${i * 0.1}s`;
+            el.appendChild(span);
+        });
+        revealObserver.observe(el);
+    });
+}
+
+// Testimonial Infinite Slider Logic (Clone items for seamless scroll)
+function initTestimonialSlider() {
+    const track = document.querySelector('.testimonials-track');
+    if (track) {
+        const content = track.innerHTML;
+        track.innerHTML = content + content; // Double the items
+    }
+}
+
+// Initialize New Features
+initTicker();
+initStaggeredReveals();
+initTestimonialSlider();

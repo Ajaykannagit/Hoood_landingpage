@@ -63,9 +63,9 @@ body {
 
 .futuristic-card:hover {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(16, 185, 129, 0.4);
-    transform: translateY(-5px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.6);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(16, 185, 129, 0.2);
 }
 
 /* Neon Glow Effects */
@@ -146,49 +146,93 @@ body {
     border: 2px solid #10b981;
 }
 
-/* Aurora Background Animation */
-.aurora-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -20;
-    overflow: hidden;
-    background: #050505;
-}
-
-.aurora-blob {
+/* --- Aurora Atmosphere --- */
+.blob {
     position: absolute;
-    width: 60vw;
-    height: 60vw;
-    background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
     border-radius: 50%;
-    filter: blur(80px);
-    animation: auroraRotate 20s infinite alternate ease-in-out;
+    filter: blur(100px);
+    opacity: 0.12;
+    z-index: -20;
+    transition: all 1s ease;
 }
 
 .blob-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, #10b981 0%, transparent 70%);
     top: -10%;
-    left: -10%;
-    animation-delay: 0s;
+    right: -10%;
+    animation: float-blob 20s infinite alternate;
 }
 
 .blob-2 {
-    bottom: -10%;
-    right: -10%;
-    background: radial-gradient(circle, rgba(52, 211, 153, 0.05) 0%, transparent 70%);
-    animation-delay: -5s;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, #34d399 0%, transparent 70%);
+    bottom: 10%;
+    left: -10%;
+    animation: float-blob 25s infinite alternate-reverse;
 }
 
-@keyframes auroraRotate {
+.blob-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, #059669 0%, transparent 70%);
+    top: 40%;
+    left: 40%;
+    animation: float-blob 30s infinite alternate;
+}
+
+@keyframes float-blob {
     0% {
-        transform: translate(0, 0) rotate(0deg);
+        transform: translate(10px, 10px) scale(1);
+    }
+
+    33% {
+        transform: translate(50px, -70px) scale(1.15);
+    }
+
+    66% {
+        transform: translate(-40px, 40px) scale(0.9);
     }
 
     100% {
-        transform: translate(10%, 10%) rotate(90deg);
+        transform: translate(10px, 10px) scale(1);
     }
+}
+
+/* --- Ticker Marquee --- */
+.animate-marquee {
+    display: inline-flex;
+    animation: marquee 50s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.ticker-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 50px;
+    color: #4b5563;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    white-space: nowrap;
+}
+
+.ticker-item strong {
+    color: #10b981;
+    margin: 0 8px;
+    font-weight: 900;
 }
 
 /* Button Refinement */
@@ -720,4 +764,131 @@ body {
         min-height: 300px;
         padding: 2rem !important;
     }
+}
+
+/* --- Mind Graph Section --- */
+.mind-graph-container {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4rem;
+    padding: 4rem;
+    position: relative;
+    box-shadow: inset 0 0 50px rgba(16, 185, 129, 0.05);
+    margin-top: 2rem;
+}
+
+.graph-node {
+    fill: #10b981;
+    filter: url(#glow);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}
+
+.graph-node:hover {
+    r: 12;
+    fill: #34d399;
+}
+
+.core-node {
+    fill: #34d399;
+    animation: core-pulse 3s infinite ease-in-out;
+}
+
+@keyframes core-pulse {
+
+    0%,
+    100% {
+        r: 8;
+        opacity: 1;
+    }
+
+    50% {
+        r: 10;
+        opacity: 0.7;
+    }
+}
+
+.graph-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: draw-line 3s forwards ease-out;
+    transition: opacity 0.5s ease, stroke-width 0.3s ease;
+}
+
+@keyframes draw-line {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+.data-tag {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 8px 16px;
+    border-radius: 99px;
+    font-size: 10px;
+    font-weight: 800;
+    color: #10b981;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Pricing Section --- */
+.pricing-card {
+    padding: 3rem !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
+}
+
+.pricing-card:hover {
+    border-color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.05) !important;
+    transform: translateY(-12px) scale(1.02) !important;
+}
+
+/* --- Testimonial Slider --- */
+.testimonials-track {
+    display: flex;
+    gap: 2rem;
+    animation: slide-testimonials 60s linear infinite;
+    width: max-content;
+}
+
+@keyframes slide-testimonials {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.testimonials-track:hover {
+    animation-play-state: paused;
+}
+
+/* --- Cinematic Staggered Reveal --- */
+.reveal-stagger {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+.reveal-stagger span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-stagger.active span {
+    opacity: 1;
+    transform: translateY(0);
 }
