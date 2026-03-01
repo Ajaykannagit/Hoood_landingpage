@@ -321,9 +321,12 @@ if (canvas) {
         }
     }
 
+    let ripples = [];
+
     function init() {
         resize();
         particles = [];
+        ripples = [];
         for (let i = 0; i < particleCount; i++) {
             particles.push(new Particle());
         }
@@ -365,12 +368,44 @@ if (canvas) {
             });
         });
 
+        // Draw ripples
+        ripples.forEach((r, i) => {
+            ctx.beginPath();
+            ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = `rgba(16, 185, 129, ${r.alpha})`;
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            r.radius += 4;
+            r.alpha -= 0.02;
+            if (r.alpha <= 0) ripples.splice(i, 1);
+        });
+
         requestAnimationFrame(animate);
     }
 
     window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+    });
+
+    window.addEventListener('click', (e) => {
+        ripples.push({
+            x: e.clientX,
+            y: e.clientY,
+            radius: 0,
+            alpha: 1
+        });
+
+        // Push particles away from click
+        particles.forEach(p => {
+            const dx = p.x - e.clientX;
+            const dy = p.y - e.clientY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+                p.vx += (dx / dist) * 2;
+                p.vy += (dy / dist) * 2;
+            }
+        });
     });
 
     init();
@@ -572,15 +607,41 @@ document.querySelectorAll('.graph-node').forEach(node => {
 // Cinematic Staggered Text Reveal Logic
 function initStaggeredReveals() {
     document.querySelectorAll('.reveal-stagger').forEach(el => {
-        const text = el.innerText;
-        el.innerHTML = '';
-        text.split(' ').forEach((word, i) => {
-            const span = document.createElement('span');
-            span.innerText = word + (i === text.split(' ').length - 1 ? '' : ' ');
-            span.style.transitionDelay = `${i * 0.1}s`;
-            el.appendChild(span);
-        });
-        revealObserver.observe(el);
+        let wordCount = 0;
+
+        const processNode = (node) => {
+            if (node.nodeType === 3) { // Text node
+                const text = node.textContent;
+                if (!text.trim()) return;
+
+                const words = text.split(/(\s+)/);
+                const fragment = document.createDocumentFragment();
+
+                words.forEach(word => {
+                    if (word.trim()) {
+                        const span = document.createElement('span');
+                        span.className = 'reveal-word';
+                        span.innerText = word;
+                        span.style.transitionDelay = `${wordCount * 0.05}s`;
+                        fragment.appendChild(span);
+                        wordCount++;
+                    } else {
+                        fragment.appendChild(document.createTextNode(word));
+                    }
+                });
+
+                node.parentNode.replaceChild(fragment, node);
+            } else if (node.nodeType === 1) { // Element node
+                // Don't process internal reveal-word spans if re-run
+                if (node.classList.contains('reveal-word')) return;
+                Array.from(node.childNodes).forEach(processNode);
+            }
+        };
+
+        processNode(el);
+        if (typeof revealObserver !== 'undefined') {
+            revealObserver.observe(el);
+        }
     });
 }
 
@@ -597,3 +658,97 @@ function initTestimonialSlider() {
 initTicker();
 initStaggeredReveals();
 initTestimonialSlider();
+
+// --- AI Chat Assistant Logic ---
+const chatToggleBtn = document.getElementById('chat-toggle');
+const aiChatWindow = document.getElementById('chat-window');
+const closeChatBtn = document.getElementById('close-chat');
+const chatMsgsBody = document.getElementById('chat-body');
+const chatInputForm = document.getElementById('chat-form');
+const chatInputField = document.getElementById('chat-input');
+const chatNotifDot = chatToggleBtn?.querySelector('.bg-red-500');
+
+let isChatWidgetOpen = false;
+let hasOpenedChatWidget = false;
+
+if (chatToggleBtn && aiChatWindow) {
+    const handleChatToggle = () => {
+        isChatWidgetOpen = !isChatWidgetOpen;
+        if (isChatWidgetOpen) {
+            aiChatWindow.classList.add('chat-open');
+            if (chatNotifDot) chatNotifDot.classList.add('hidden');
+            if (!hasOpenedChatWidget) {
+                hasOpenedChatWidget = true;
+                setTimeout(() => {
+                    appendChatMessage("bot", "Hello! I'm the Hoood Engine. How can I assist you with AI prompts today?");
+                }, 500);
+            }
+        } else {
+            aiChatWindow.classList.remove('chat-open');
+        }
+    };
+
+    chatToggleBtn.addEventListener('click', handleChatToggle);
+    closeChatBtn.addEventListener('click', handleChatToggle);
+
+    chatInputForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const msg = chatInputField.value.trim();
+        if (!msg) return;
+
+        appendChatMessage("user", msg);
+        chatInputField.value = '';
+
+        const submitBtn = chatInputForm.querySelector('button');
+        chatInputField.disabled = true;
+        submitBtn.disabled = true;
+
+        const typingId = showTypingDots();
+
+        setTimeout(() => {
+            removeTypingDots(typingId);
+            appendChatMessage("bot", getBotReply(msg));
+            chatInputField.disabled = false;
+            submitBtn.disabled = false;
+            chatInputField.focus();
+        }, 1200 + Math.random() * 800);
+    });
+}
+
+function appendChatMessage(sender, text) {
+    const msgDiv = document.createElement('div');
+    const isUser = sender === 'user';
+    msgDiv.className = `max-w-[85%] rounded-2xl px-4 py-2.5 text-sm chat-message-enter flex flex-col ${isUser ? 'bg-brand-green text-white self-end rounded-br-none' : 'bg-white/10 text-gray-200 self-start rounded-tl-none border border-white/5 shadow-md'}`;
+
+    msgDiv.innerHTML = text; // allow basic html in bot replies
+    chatMsgsBody.appendChild(msgDiv);
+    chatMsgsBody.scrollTop = chatMsgsBody.scrollHeight;
+}
+
+function showTypingDots() {
+    const id = 'typing-' + Date.now();
+    const msgDiv = document.createElement('div');
+    msgDiv.id = id;
+    msgDiv.className = `max-w-[85%] rounded-2xl px-4 py-3 text-sm chat-message-enter flex items-center gap-1 bg-white/10 self-start rounded-tl-none border border-white/5 typing-dots`;
+    msgDiv.innerHTML = `
+        <span class="w-1.5 h-1.5 bg-brand-green rounded-full inline-block"></span>
+        <span class="w-1.5 h-1.5 bg-brand-green rounded-full inline-block"></span>
+        <span class="w-1.5 h-1.5 bg-brand-green rounded-full inline-block"></span>
+    `;
+    chatMsgsBody.appendChild(msgDiv);
+    chatMsgsBody.scrollTop = chatMsgsBody.scrollHeight;
+    return id;
+}
+
+function removeTypingDots(id) {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+}
+
+function getBotReply(text) {
+    text = text.toLowerCase();
+    if (text.includes('remix')) return `Remixing is easy! Just find a prompt you like in our library and hit the 'Remix' button to branch it.`;
+    if (text.includes('price') || text.includes('cost')) return `We have an Explorer tier for free, and an Engineer tier for $29/mo that includes unlimited remixes!`;
+    if (text.includes('deploy')) return `You can deploy prompts to any model (GPT-4, Claude 3, etc.) directly from your Hoood dashboard.`;
+    return `That sounds interesting! The v3.0 network is designed to help with exactly that type of AI logic. Feel free to explore our Neural Tiers.`;
+}

@@ -6,8 +6,11 @@
 
 ## 🚀 Key Features
 
-### 🌌 Interactive Neural Grid
-A custom, high-performance Canvas-based background that reacts to mouse movement, visually representing the interconnected nature of AI logic.
+### 🤖 Floating AI Assistant
+An integrated AI chat widget featuring glassmorphic design and typing animations to guide users through the Hoood ecosystem.
+
+### 🌌 Interactive Neural Grid & Glitch Transitions
+A high-performance Canvas-based background with interactive click-burst ripples, combined with futuristic CSS keyframe glitch hover effects on key headings.
 
 ### 📼 Animated Multi-Step Flow
 A premium, horizontal stepper experience that guides users through the Hoood ecosystem with fluid transitions and real-time progress tracking.
