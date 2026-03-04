@@ -1,3 +1,35 @@
+// --- Initial Loader Logic ---
+window.addEventListener('DOMContentLoaded', () => {
+    const loaderWrapper = document.getElementById('loader-wrapper');
+    const loaderProgress = document.getElementById('loader-progress');
+    document.body.classList.add('loading');
+
+    // Simulate progress bar
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += Math.random() * 30;
+        if (progress > 100) progress = 100;
+        if (loaderProgress) loaderProgress.style.width = `${progress}%`;
+        if (progress === 100) clearInterval(interval);
+    }, 200);
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            if (loaderProgress) loaderProgress.style.width = '100%';
+            setTimeout(() => {
+                if (loaderWrapper) {
+                    loaderWrapper.classList.add('loader-hidden');
+                    document.body.classList.remove('loading');
+                    // Small delay to remove from DOM if needed, but here we just hide it
+                    setTimeout(() => {
+                        loaderWrapper.style.display = 'none';
+                    }, 700);
+                }
+            }, 500);
+        }, 800);
+    });
+});
+
 // Initialize Lucide Icons
 lucide.createIcons();
 

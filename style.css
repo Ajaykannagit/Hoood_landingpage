@@ -1517,3 +1517,49 @@ body {
     color: #4b5563;
     font-weight: 600;
 }
+
+/* --- Initial Loader Styles --- */
+#loader-wrapper.loader-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.loader-dot {
+    animation: loaderDotPulse 1.5s infinite ease-in-out;
+}
+
+.loader-dot.dot-1 {
+    animation-delay: 0s;
+}
+
+.loader-dot.dot-2 {
+    animation-delay: 0.2s;
+}
+
+.loader-dot.dot-3 {
+    animation-delay: 0.4s;
+}
+
+@keyframes loaderDotPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(0.7);
+        opacity: 0.5;
+    }
+}
+
+#loader-progress {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+/* Disable scrolling when loader is active */
+body.loading {
+    overflow: hidden !important;
+}
