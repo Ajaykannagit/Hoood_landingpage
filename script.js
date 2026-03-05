@@ -20,10 +20,9 @@ window.addEventListener('DOMContentLoaded', () => {
                 if (loaderWrapper) {
                     loaderWrapper.classList.add('loader-hidden');
                     document.body.classList.remove('loading');
+                    // Small delay to remove from DOM if needed, but here we just hide it
                     setTimeout(() => {
                         loaderWrapper.style.display = 'none';
-                        // Initialize Next-Gen Features after loader
-                        initHero3D();
                     }, 700);
                 }
             }, 500);
@@ -67,45 +66,30 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Custom Cursor Logic (Next Gen Magnetic)
+// Custom Cursor Logic
 const cursor = document.createElement('div');
 cursor.className = 'custom-cursor';
 document.body.appendChild(cursor);
 
-let mouseX = 0, mouseY = 0;
-let cursorX = 0, cursorY = 0;
-
 window.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
 });
 
-function animateCursor() {
-    let dt = 0.15;
-    cursorX += (mouseX - cursorX) * dt;
-    cursorY += (mouseY - cursorY) * dt;
-
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-
-    requestAnimationFrame(animateCursor);
-}
-animateCursor();
-
-document.querySelectorAll('a, button, .futuristic-card, .bento-card').forEach(el => {
+document.querySelectorAll('a, button, .futuristic-card').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('active'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
 });
 
 // Magnetic Elements Logic (Buttons & Nav Links)
-document.querySelectorAll('.btn-premium, .md\\:flex a, .bento-card').forEach(btn => {
+document.querySelectorAll('.btn-premium, .md\\:flex a').forEach(btn => {
     btn.addEventListener('mousemove', (e) => {
         if (window.matchMedia("(pointer: coarse)").matches) return;
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
 
-        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
         if (btn.tagName === 'A') btn.style.color = '#10b981';
     });
 
@@ -800,91 +784,3 @@ function getBotReply(text) {
     if (text.includes('deploy')) return `You can deploy prompts to any model (GPT-4, Claude 3, etc.) directly from your Hoood dashboard.`;
     return `That sounds interesting! The v3.0 network is designed to help with exactly that type of AI logic. Feel free to explore our Neural Tiers.`;
 }
-// --- Next-Gen Hero 3D Interaction (Three.js) ---
-function initHero3D() {
-    const container = document.getElementById('hero-3d-container');
-    if (!container) return;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
-
-    // Neural Sphere
-    const geometry = new THREE.IcosahedronGeometry(2, 2);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0x10b981,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.3
-    });
-    const sphere = new THREE.Mesh(geometry, material);
-    scene.add(sphere);
-
-    // Inner Core Glow
-    const coreGeom = new THREE.IcosahedronGeometry(1.8, 1);
-    const coreMat = new THREE.MeshBasicMaterial({
-        color: 0x10b981,
-        transparent: true,
-        opacity: 0.1
-    });
-    const core = new THREE.Mesh(coreGeom, coreMat);
-    scene.add(core);
-
-    // Dynamic Particles
-    const particlesCount = 1000;
-    const positions = new Float32Array(particlesCount * 3);
-    for (let i = 0; i < particlesCount * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 10;
-    }
-    const particlesGeom = new THREE.BufferGeometry();
-    particlesGeom.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    const particlesMat = new THREE.PointsMaterial({
-        color: 0x10b981,
-        size: 0.02,
-        transparent: true,
-        opacity: 0.5
-    });
-    const particleSystem = new THREE.Points(particlesGeom, particlesMat);
-    scene.add(particleSystem);
-
-    camera.position.z = 5;
-
-    let targetX = 0, targetY = 0;
-    window.addEventListener('mousemove', (e) => {
-        targetX = (e.clientX / window.innerWidth - 0.5) * 0.5;
-        targetY = (e.clientY / window.innerHeight - 0.5) * 0.5;
-    });
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        sphere.rotation.y += 0.005;
-        sphere.rotation.z += 0.002;
-
-        core.rotation.y -= 0.003;
-
-        particleSystem.rotation.y += 0.001;
-
-        // Mouse reaction
-        sphere.rotation.x += (targetY - sphere.rotation.x) * 0.05;
-        sphere.rotation.y += (targetX - sphere.rotation.y) * 0.05;
-
-        renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-}
-
-// Initialize All Features
-initTicker();
-initStaggeredReveals();
-initTestimonialSlider();
