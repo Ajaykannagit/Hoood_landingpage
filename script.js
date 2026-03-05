@@ -883,3 +883,8 @@ function initHero3D() {
         renderer.setSize(container.clientWidth, container.clientHeight);
     });
 }
+
+// Initialize All Features
+initTicker();
+initStaggeredReveals();
+initTestimonialSlider();
