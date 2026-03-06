@@ -873,7 +873,64 @@ function initPromptLab() {
     });
 }
 
-// Call initPromptLab on load
+// --- Neural Graph Logic ---
+function initNeuralGraph() {
+    const graphNodes = document.querySelectorAll('.graph-node');
+    const labelDisplay = document.getElementById('node-label');
+    const graphContainer = document.querySelector('.mind-graph-container');
+    const logicGraph = document.getElementById('logic-graph');
+
+    if (!graphNodes.length || !labelDisplay) return;
+
+    // Node Hover Interaction
+    graphNodes.forEach(node => {
+        node.addEventListener('mouseenter', () => {
+            const label = node.getAttribute('data-label');
+            labelDisplay.textContent = label;
+            labelDisplay.style.background = 'rgba(16, 185, 129, 0.2)';
+            labelDisplay.style.borderColor = 'rgba(16, 185, 129, 0.8)';
+            labelDisplay.style.transform = 'translateX(-50%) scale(1.1)';
+        });
+
+        node.addEventListener('mouseleave', () => {
+            labelDisplay.textContent = 'Hover nodes to explore logic';
+            labelDisplay.style.background = 'rgba(16, 185, 129, 0.1)';
+            labelDisplay.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+            labelDisplay.style.transform = 'translateX(-50%) scale(1)';
+        });
+
+        // Click for "Neural Flare" effect
+        node.addEventListener('click', () => {
+            const flare = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+            flare.setAttribute("cx", node.getAttribute("cx"));
+            flare.setAttribute("cy", node.getAttribute("cy"));
+            flare.setAttribute("r", "5");
+            flare.setAttribute("fill", "#fff");
+            flare.innerHTML = `<animate attributeName="r" from="5" to="50" dur="0.8s" fill="freeze" />
+                               <animate attributeName="opacity" from="0.6" to="0" dur="0.8s" fill="freeze" />`;
+            logicGraph.appendChild(flare);
+            setTimeout(() => flare.remove(), 1000);
+        });
+    });
+
+    // Mouse Parallax effect
+    if (graphContainer) {
+        graphContainer.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = graphContainer.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+
+            logicGraph.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${y * -10}deg) scale(1.02)`;
+        });
+
+        graphContainer.addEventListener('mouseleave', () => {
+            logicGraph.style.transform = `perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)`;
+        });
+    }
+}
+
+// Call initPromptLab and initNeuralGraph on load
 window.addEventListener('load', () => {
     initPromptLab();
+    initNeuralGraph();
 });

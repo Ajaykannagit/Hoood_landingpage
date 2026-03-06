@@ -1658,3 +1658,58 @@ body.loading {
     transform: translateY(0);
 }
 
+
+/* --- Intelligence Visualization Upgrade --- */
+.active-node-label {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 700;
+    backdrop-filter: blur(10px);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    z-index: 10;
+    pointer-events: none;
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.neural-pulse {
+    filter: drop-shadow(0 0 5px #34d399);
+    opacity: 0.8;
+}
+
+.endpoint-node {
+    fill: #34d399;
+    animation: endpoint-pulse 2s infinite;
+}
+
+@keyframes endpoint-pulse {
+    0%, 100% { transform-origin: center; transform: scale(1); filter: brightness(1); }
+    50% { transform-origin: center; transform: scale(1.1); filter: brightness(1.5); }
+}
+
+.graph-node {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.graph-node:hover {
+    r: 10 !important;
+    fill: #fff !important;
+    filter: drop-shadow(0 0 10px #fff);
+}
+
+.graph-line {
+    transition: stroke-width 0.3s ease, opacity 0.3s ease;
+}
+
+.graph-links:hover .graph-line {
+    opacity: 0.4;
+}
+

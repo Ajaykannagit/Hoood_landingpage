@@ -965,39 +965,109 @@
 
                 <div class="mind-graph-container reveal">
                     <svg viewBox="0 0 1000 600" class="w-full h-auto" id="logic-graph">
-                        <!-- SVG content will be enhanced by CSS/JS -->
                         <defs>
                             <filter id="glow">
                                 <feGaussianBlur stdDeviation="3" result="blur" />
                                 <feComposite in="SourceGraphic" in2="blur" operator="over" />
                             </filter>
+                            <linearGradient id="neural-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#10b981" stop-opacity="0.2" />
+                                <stop offset="50%" stop-color="#10b981" stop-opacity="0.6" />
+                                <stop offset="100%" stop-color="#10b981" stop-opacity="0.2" />
+                            </linearGradient>
                         </defs>
-                        <g class="graph-links opacity-20" stroke="#10b981" stroke-width="1">
-                            <line x1="200" y1="300" x2="400" y2="150" class="graph-line" />
-                            <line x1="200" y1="300" x2="400" y2="300" class="graph-line" />
-                            <line x1="200" y1="300" x2="400" y2="450" class="graph-line" />
-                            <line x1="400" y1="150" x2="700" y2="100" class="graph-line" />
-                            <line x1="400" y1="300" x2="700" y2="300" class="graph-line" />
-                            <line x1="400" y1="450" x2="700" y2="500" class="graph-line" />
+
+                        <!-- Neural Pathways (Complex connections) -->
+                        <g class="graph-links opacity-20" stroke="url(#neural-gradient)" stroke-width="1.5">
+                            <!-- Core to Tier 1 -->
+                            <line x1="150" y1="300" x2="300" y2="150" class="graph-line" />
+                            <line x1="150" y1="300" x2="300" y2="300" class="graph-line" />
+                            <line x1="150" y1="300" x2="300" y2="450" class="graph-line" />
+
+                            <!-- Tier 1 to Tier 2 -->
+                            <line x1="300" y1="150" x2="500" y2="100" class="graph-line" />
+                            <line x1="300" y1="150" x2="500" y2="200" class="graph-line" />
+                            <line x1="300" y1="300" x2="500" y2="250" class="graph-line" />
+                            <line x1="300" y1="300" x2="500" y2="350" class="graph-line" />
+                            <line x1="300" y1="450" x2="500" y2="400" class="graph-line" />
+                            <line x1="300" y1="450" x2="500" y2="500" class="graph-line" />
+
+                            <!-- Tier 2 to Tier 3 (Cross connections) -->
+                            <line x1="500" y1="100" x2="750" y2="80" class="graph-line" />
+                            <line x1="500" y1="200" x2="750" y2="150" class="graph-line" />
+                            <line x1="500" y1="200" x2="750" y2="250" class="graph-line" />
+                            <line x1="500" y1="350" x2="750" y2="350" class="graph-line" />
+                            <line x1="500" y1="400" x2="750" y2="450" class="graph-line" />
+                            <line x1="500" y1="500" x2="750" y2="520" class="graph-line" />
+
+                            <!-- Final Layer -->
+                            <line x1="750" y1="150" x2="900" y2="300" class="graph-line" />
+                            <line x1="750" y1="350" x2="900" y2="300" class="graph-line" />
+                            <line x1="750" y1="450" x2="900" y2="300" class="graph-line" />
                         </g>
+
+                        <!-- Neural Nodes -->
                         <g class="graph-nodes">
-                            <circle cx="200" cy="300" r="8" class="graph-node core-node" />
-                            <circle cx="400" cy="150" r="5" class="graph-node" />
-                            <circle cx="400" cy="300" r="5" class="graph-node" />
-                            <circle cx="400" cy="450" r="5" class="graph-node" />
-                            <circle cx="700" cy="100" r="5" class="graph-node" />
-                            <circle cx="700" cy="300" r="5" class="graph-node" />
-                            <circle cx="700" cy="500" r="5" class="graph-node" />
+                            <!-- Core -->
+                            <circle cx="150" cy="300" r="12" class="graph-node core-node"
+                                data-label="Primary Intelligence" />
+
+                            <!-- Tier 1 -->
+                            <circle cx="300" cy="150" r="6" class="graph-node" data-label="Semantic Analysis" />
+                            <circle cx="300" cy="300" r="6" class="graph-node" data-label="Contextual Mapping" />
+                            <circle cx="300" cy="450" r="6" class="graph-node" data-label="Logic Synthesis" />
+
+                            <!-- Tier 2 -->
+                            <circle cx="500" cy="100" r="5" class="graph-node" data-label="Token Weighting" />
+                            <circle cx="500" cy="200" r="5" class="graph-node" data-label="Attention Mechanism" />
+                            <circle cx="500" cy="250" r="5" class="graph-node" data-label="Cross-Model Sync" />
+                            <circle cx="500" cy="350" r="5" class="graph-node" data-label="Reasoning Chains" />
+                            <circle cx="500" cy="400" r="5" class="graph-node" data-label="Constraint Validation" />
+                            <circle cx="500" cy="500" r="5" class="graph-node" data-label="Output Refinement" />
+
+                            <!-- Tier 3 -->
+                            <circle cx="750" cy="80" r="4" class="graph-node" data-label="Dynamic Branching" />
+                            <circle cx="750" cy="150" r="4" class="graph-node" data-label="Recursive Loops" />
+                            <circle cx="750" cy="250" r="4" class="graph-node" data-label="Holographic Storage" />
+                            <circle cx="750" cy="350" r="4" class="graph-node" data-label="Neural Sharding" />
+                            <circle cx="750" cy="450" r="4" class="graph-node" data-label="Entropy Reduction" />
+                            <circle cx="750" cy="520" r="4" class="graph-node" data-label="Final Execution" />
+
+                            <!-- Endpoint -->
+                            <circle cx="900" cy="300" r="8" class="graph-node endpoint-node"
+                                data-label="Optimized Output" />
                         </g>
+
+                        <!-- Neural Pulse (Visual effect along paths) -->
+                        <circle r="3" fill="#34d399" class="neural-pulse">
+                            <animateMotion dur="3s" repeatCount="infinite"
+                                path="M 150 300 L 300 300 L 500 350 L 750 350 L 900 300" />
+                        </circle>
+                        <circle r="2" fill="#10b981" class="neural-pulse">
+                            <animateMotion dur="4s" begin="1s" repeatCount="infinite"
+                                path="M 150 300 L 300 150 L 500 100 L 750 80" />
+                        </circle>
+                        <circle r="2" fill="#10b981" class="neural-pulse">
+                            <animateMotion dur="5s" begin="0.5s" repeatCount="infinite"
+                                path="M 150 300 L 300 450 L 500 500 L 750 520" />
+                        </circle>
                     </svg>
 
-                    <!-- Floating Data Tags -->
-                    <div class="absolute top-[20%] left-[35%] data-tag reveal" style="transition-delay: 0.5s">Prompt
-                        Optimization</div>
-                    <div class="absolute top-[48%] left-[45%] data-tag reveal" style="transition-delay: 0.7s">Neural
-                        Branching</div>
-                    <div class="absolute top-[75%] left-[65%] data-tag reveal" style="transition-delay: 0.9s">Recursive
-                        Logic</div>
+                    <!-- Enhanced Dynamic Labels (Floating) -->
+                    <div class="active-node-label" id="node-label">Hover nodes to explore logic</div>
+
+                    <div class="absolute top-[15%] left-[10%] data-tag reveal" style="transition-delay: 0.2s">Input
+                        Layer</div>
+                    <div class="absolute top-[50%] left-[28%] data-tag reveal" style="transition-delay: 0.4s">Hidden
+                        Clusters</div>
+                    <div class="absolute top-[10%] left-[48%] data-tag reveal" style="transition-delay: 0.6s">Attention
+                        Weights</div>
+                    <div class="absolute top-[80%] left-[52%] data-tag reveal" style="transition-delay: 0.8s">Logical
+                        Verification</div>
+                    <div class="absolute top-[40%] left-[72%] data-tag reveal" style="transition-delay: 1.0s">Recursive
+                        Tunnels</div>
+                    <div class="absolute top-[65%] left-[88%] data-tag reveal" style="transition-delay: 1.2s">Neural
+                        Result</div>
                 </div>
             </div>
         </section>
