@@ -784,3 +784,96 @@ function getBotReply(text) {
     if (text.includes('deploy')) return `You can deploy prompts to any model (GPT-4, Claude 3, etc.) directly from your Hoood dashboard.`;
     return `That sounds interesting! The v3.0 network is designed to help with exactly that type of AI logic. Feel free to explore our Neural Tiers.`;
 }
+
+// --- Prompt Lab Logic ---
+function initPromptLab() {
+    const optimizeBtn = document.getElementById('optimize-btn');
+    const engineVisual = document.getElementById('engine-visual');
+    const optimizedCard = document.getElementById('optimized-card');
+    const optimizedText = document.getElementById('optimized-prompt-text');
+    const engineStatus = document.getElementById('engine-status');
+    const standardText = document.getElementById('standard-prompt-text');
+
+    if (!optimizeBtn) return;
+
+    let isOptimizing = false;
+
+    optimizeBtn.addEventListener('click', () => {
+        if (isOptimizing) return;
+        isOptimizing = true;
+
+        // Reset and start animation
+        optimizeBtn.disabled = true;
+        optimizeBtn.textContent = "Processing...";
+        engineStatus.textContent = "Neural Synthesis in Progress...";
+        engineVisual.classList.add('animate-pulse');
+        optimizedCard.classList.add('processing');
+        optimizedText.classList.remove('reveal-active');
+        optimizedText.style.opacity = '0.2';
+
+        // Glitch effect on input
+        standardText.classList.add('optimization-glitch');
+
+        setTimeout(() => {
+            // End processing state
+            isOptimizing = false;
+            optimizeBtn.disabled = false;
+            optimizeBtn.textContent = "Optimization Complete";
+            engineStatus.textContent = "Optimization Successful";
+            engineVisual.classList.remove('animate-pulse');
+            optimizedCard.classList.remove('processing');
+            standardText.classList.remove('optimization-glitch');
+
+            // Reveal optimized text
+            optimizedText.style.opacity = '1';
+
+            // Wrap text in spans if not already for staggered reveal
+            if (!optimizedText.querySelector('span')) {
+                const words = optimizedText.innerHTML.split(/(\s+|<br>)/);
+                optimizedText.innerHTML = words.map((word, i) => {
+                    if (word === '<br>') return '<br>';
+                    if (word.trim()) {
+                        return `<span style="transition-delay: ${i * 0.03}s">${word}</span>`;
+                    }
+                    return word;
+                }).join('');
+            }
+
+            setTimeout(() => {
+                optimizedText.classList.add('reveal-active');
+
+                // Trigger counter animation for the efficiency boost
+                const counter = optimizedCard.querySelector('.counter');
+                if (counter) {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    let current = 0;
+                    const duration = 1500;
+                    const step = target / (duration / 16);
+
+                    const updateCounter = () => {
+                        current += step;
+                        if (current < target) {
+                            counter.textContent = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    updateCounter();
+                }
+            }, 50);
+
+            // Reset button after some time
+            setTimeout(() => {
+                optimizeBtn.textContent = "Run Optimization";
+                engineStatus.textContent = "Engine Ready";
+            }, 5000);
+
+        }, 2000);
+    });
+}
+
+// Call initPromptLab on load
+window.addEventListener('load', () => {
+    initPromptLab();
+});
