@@ -977,97 +977,98 @@
                             </linearGradient>
                         </defs>
 
-                        <!-- Neural Pathways (Complex connections) -->
-                        <g class="graph-links opacity-20" stroke="url(#neural-gradient)" stroke-width="1.5">
-                            <!-- Core to Tier 1 -->
-                            <line x1="100" y1="300" x2="275" y2="150" class="graph-line" />
-                            <line x1="100" y1="300" x2="275" y2="300" class="graph-line" />
-                            <line x1="100" y1="300" x2="275" y2="450" class="graph-line" />
+                        <!-- Intelligence 3.0: Logic Gate Architecture -->
 
-                            <!-- Tier 1 to Tier 2 -->
-                            <line x1="275" y1="150" x2="500" y2="100" class="graph-line" />
-                            <line x1="275" y1="150" x2="500" y2="200" class="graph-line" />
-                            <line x1="275" y1="300" x2="500" y2="250" class="graph-line" />
-                            <line x1="275" y1="300" x2="500" y2="350" class="graph-line" />
-                            <line x1="275" y1="450" x2="500" y2="400" class="graph-line" />
-                            <line x1="275" y1="450" x2="500" y2="500" class="graph-line" />
-
-                            <!-- Tier 2 to Tier 3 (Cross connections) -->
-                            <line x1="500" y1="100" x2="725" y2="80" class="graph-line" />
-                            <line x1="500" y1="200" x2="725" y2="150" class="graph-line" />
-                            <line x1="500" y1="200" x2="725" y2="250" class="graph-line" />
-                            <line x1="500" y1="350" x2="725" y2="350" class="graph-line" />
-                            <line x1="500" y1="400" x2="725" y2="450" class="graph-line" />
-                            <line x1="500" y1="500" x2="725" y2="520" class="graph-line" />
-
-                            <!-- Final Layer -->
-                            <line x1="725" y1="150" x2="900" y2="300" class="graph-line" />
-                            <line x1="725" y1="350" x2="900" y2="300" class="graph-line" />
-                            <line x1="725" y1="450" x2="900" y2="300" class="graph-line" />
+                        <!-- Neural Trunks (Clean, powerful data paths) -->
+                        <g class="data-trunks">
+                            <path d="M 220 300 Q 500 150 780 300" class="data-trunk" id="trunk-top" fill="none" />
+                            <path d="M 220 300 L 780 300" class="data-trunk" id="trunk-mid" fill="none" />
+                            <path d="M 220 300 Q 500 450 780 300" class="data-trunk" id="trunk-bottom" fill="none" />
                         </g>
 
-                        <!-- Neural Nodes -->
-                        <g class="graph-nodes">
-                            <!-- Core -->
-                            <circle cx="100" cy="300" r="12" class="graph-node core-node"
-                                data-label="Primary Intelligence" />
+                        <!-- Pulse Animations on Trunks -->
+                        <circle r="4" fill="#34d399" filter="url(#glow)">
+                            <animateMotion dur="2s" repeatCount="infinite">
+                                <mpath href="#trunk-mid" />
+                            </animateMotion>
+                        </circle>
+                        <circle r="3" fill="#10b981" opacity="0.5">
+                            <animateMotion dur="3s" begin="0.5s" repeatCount="infinite">
+                                <mpath href="#trunk-top" />
+                            </animateMotion>
+                        </circle>
+                        <circle r="3" fill="#10b981" opacity="0.5">
+                            <animateMotion dur="2.5s" begin="1s" repeatCount="infinite">
+                                <mpath href="#trunk-bottom" />
+                            </animateMotion>
+                        </circle>
 
-                            <!-- Tier 1 -->
-                            <circle cx="275" cy="150" r="6" class="graph-node" data-label="Semantic Analysis" />
-                            <circle cx="275" cy="300" r="6" class="graph-node" data-label="Contextual Mapping" />
-                            <circle cx="275" cy="450" r="6" class="graph-node" data-label="Logic Synthesis" />
+                        <!-- Logic Gates (Hexagonal Hubs) -->
 
-                            <!-- Tier 2 -->
-                            <circle cx="500" cy="100" r="5" class="graph-node" data-label="Token Weighting" />
-                            <circle cx="500" cy="200" r="5" class="graph-node" data-label="Attention Mechanism" />
-                            <circle cx="500" cy="250" r="5" class="graph-node" data-label="Cross-Model Sync" />
-                            <circle cx="500" cy="350" r="5" class="graph-node" data-label="Reasoning Chains" />
-                            <circle cx="500" cy="400" r="5" class="graph-node" data-label="Constraint Validation" />
-                            <circle cx="500" cy="500" r="5" class="graph-node" data-label="Output Refinement" />
-
-                            <!-- Tier 3 -->
-                            <circle cx="725" cy="80" r="4" class="graph-node" data-label="Dynamic Branching" />
-                            <circle cx="725" cy="150" r="4" class="graph-node" data-label="Recursive Loops" />
-                            <circle cx="725" cy="250" r="4" class="graph-node" data-label="Holographic Storage" />
-                            <circle cx="725" cy="350" r="4" class="graph-node" data-label="Neural Sharding" />
-                            <circle cx="725" cy="450" r="4" class="graph-node" data-label="Entropy Reduction" />
-                            <circle cx="725" cy="520" r="4" class="graph-node" data-label="Final Execution" />
-
-                            <!-- Endpoint -->
-                            <circle cx="900" cy="300" r="8" class="graph-node endpoint-node"
-                                data-label="Optimized Output" />
+                        <!-- Gate 1: PERCEPTION (Input) -->
+                        <g class="logic-gate" transform="translate(150, 300)"
+                            data-label="Perception Gate: Semantic Input Analysis">
+                            <circle r="80" class="heatmap-pulse" fill="url(#neural-gradient)" fill-opacity="0.1" />
+                            <path d="M 0 -50 L 43.3 -25 L 43.3 25 L 0 50 L -43.3 25 L -43.3 -25 Z"
+                                fill="rgba(10,10,10,0.8)" stroke="#10b981" stroke-width="2" class="gate-hex" />
+                            <path d="M 0 -55 L 47.6 -27.5 L 47.6 27.5 L 0 55 L -47.6 27.5 L -47.6 -27.5 Z" fill="none"
+                                stroke="#10b981" stroke-width="1" stroke-opacity="0.3" class="gate-highlight" />
+                            <text y="5" text-anchor="middle" class="gate-label-30">INPUT</text>
+                            <!-- Bit Stream (Internal) -->
+                            <g class="bit-stream-container" transform="translate(-20, -20)">
+                                <rect x="0" y="0" width="4" height="10" class="bit-bar" style="--dur: 0.8s" />
+                                <rect x="8" y="0" width="4" height="15" class="bit-bar" style="--dur: 1.2s" />
+                                <rect x="16" y="0" width="4" height="8" class="bit-bar" style="--dur: 0.5s" />
+                                <rect x="24" y="0" width="4" height="12" class="bit-bar" style="--dur: 1.5s" />
+                                <rect x="32" y="0" width="4" height="6" class="bit-bar" style="--dur: 0.9s" />
+                            </g>
                         </g>
 
-                        <!-- Neural Pulse (Visual effect along paths) -->
-                        <circle r="3" fill="#34d399" class="neural-pulse">
-                            <animateMotion dur="3s" repeatCount="infinite"
-                                path="M 100 300 L 275 300 L 500 350 L 725 350 L 900 300" />
-                        </circle>
-                        <circle r="2" fill="#10b981" class="neural-pulse">
-                            <animateMotion dur="4s" begin="1s" repeatCount="infinite"
-                                path="M 100 300 L 275 150 L 500 100 L 725 80" />
-                        </circle>
-                        <circle r="2" fill="#10b981" class="neural-pulse">
-                            <animateMotion dur="5s" begin="0.5s" repeatCount="infinite"
-                                path="M 100 300 L 275 450 L 500 500 L 725 520" />
-                        </circle>
+                        <!-- Gate 2: SYNTHESIS (Core) -->
+                        <g class="logic-gate" transform="translate(500, 300)"
+                            data-label="Synthesis Gate: Recursive Reasoning Engine">
+                            <circle r="100" class="heatmap-pulse" fill="url(#neural-gradient)" fill-opacity="0.15" />
+                            <path d="M 0 -60 L 52 -30 L 52 30 L 0 60 L -52 30 L -52 -30 Z" fill="rgba(10,10,10,0.9)"
+                                stroke="#34d399" stroke-width="3" class="gate-hex" />
+                            <path d="M 0 -65 L 56.3 -32.5 L 56.3 32.5 L 0 65 L -56.3 32.5 L -56.3 -32.5 Z" fill="none"
+                                stroke="#34d399" stroke-width="1" stroke-opacity="0.5" class="gate-highlight" />
+                            <text y="5" text-anchor="middle" class="gate-label-30">CORE</text>
+                            <!-- Rotating Core Effect -->
+                            <circle r="15" fill="none" stroke="#10b981" stroke-width="1" stroke-dasharray="4,4">
+                                <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s"
+                                    repeatCount="infinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Gate 3: EXECUTION (Output) -->
+                        <g class="logic-gate" transform="translate(850, 300)"
+                            data-label="Execution Gate: Optimized Output Synthesis">
+                            <circle r="80" class="heatmap-pulse" fill="url(#neural-gradient)" fill-opacity="0.1" />
+                            <path d="M 0 -50 L 43.3 -25 L 43.3 25 L 0 50 L -43.3 25 L -43.3 -25 Z"
+                                fill="rgba(10,10,10,0.8)" stroke="#10b981" stroke-width="2" class="gate-hex" />
+                            <path d="M 0 -55 L 47.6 -27.5 L 47.6 27.5 L 0 55 L -47.6 27.5 L -47.6 -27.5 Z" fill="none"
+                                stroke="#10b981" stroke-width="1" stroke-opacity="0.3" class="gate-highlight" />
+                            <text y="5" text-anchor="middle" class="gate-label-30">RESULT</text>
+                            <!-- Bit Stream (Internal) -->
+                            <g class="bit-stream-container" transform="translate(-20, 10)">
+                                <rect x="0" y="0" width="4" height="8" class="bit-bar" style="--dur: 1.1s" />
+                                <rect x="8" y="0" width="4" height="12" class="bit-bar" style="--dur: 0.7s" />
+                                <rect x="16" y="0" width="4" height="14" class="bit-bar" style="--dur: 1.4s" />
+                                <rect x="24" y="0" width="4" height="6" class="bit-bar" style="--dur: 0.4s" />
+                                <rect x="32" y="0" width="4" height="10" class="bit-bar" style="--dur: 1.0s" />
+                            </g>
+                        </g>
                     </svg>
 
                     <!-- Enhanced Dynamic Labels (Floating) -->
                     <div class="active-node-label" id="node-label">Hover nodes to explore logic</div>
 
-                    <div class="absolute top-[15%] left-[10%] data-tag reveal" style="transition-delay: 0.2s">Input
+                    <div class="absolute top-[10%] left-[10%] data-tag reveal" style="transition-delay: 0.2s">Perception
                         Layer</div>
-                    <div class="absolute top-[50%] left-[28%] data-tag reveal" style="transition-delay: 0.4s">Hidden
-                        Clusters</div>
-                    <div class="absolute top-[10%] left-[48%] data-tag reveal" style="transition-delay: 0.6s">Attention
-                        Weights</div>
-                    <div class="absolute top-[80%] left-[52%] data-tag reveal" style="transition-delay: 0.8s">Logical
-                        Verification</div>
-                    <div class="absolute top-[40%] left-[72%] data-tag reveal" style="transition-delay: 1.0s">Recursive
-                        Tunnels</div>
-                    <div class="absolute top-[65%] left-[88%] data-tag reveal" style="transition-delay: 1.2s">Neural
-                        Result</div>
+                    <div class="absolute top-[80%] left-[45%] data-tag reveal" style="transition-delay: 0.6s">Synthesis
+                        Engine</div>
+                    <div class="absolute top-[15%] left-[80%] data-tag reveal" style="transition-delay: 1.0s">Execution
+                        Module</div>
                 </div>
             </div>
         </section>

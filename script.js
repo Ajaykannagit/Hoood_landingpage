@@ -875,24 +875,24 @@ function initPromptLab() {
 
 // --- Neural Graph Logic ---
 function initNeuralGraph() {
-    const graphNodes = document.querySelectorAll('.graph-node');
+    const logicGates = document.querySelectorAll('.logic-gate');
     const labelDisplay = document.getElementById('node-label');
     const graphContainer = document.querySelector('.mind-graph-container');
     const logicGraph = document.getElementById('logic-graph');
 
-    if (!graphNodes.length || !labelDisplay) return;
+    if (!logicGates.length || !labelDisplay) return;
 
-    // Node Hover Interaction
-    graphNodes.forEach(node => {
-        node.addEventListener('mouseenter', () => {
-            const label = node.getAttribute('data-label');
+    // Gate Hover Interaction
+    logicGates.forEach(gate => {
+        gate.addEventListener('mouseenter', () => {
+            const label = gate.getAttribute('data-label');
             labelDisplay.textContent = label;
             labelDisplay.style.background = 'rgba(16, 185, 129, 0.2)';
             labelDisplay.style.borderColor = 'rgba(16, 185, 129, 0.8)';
             labelDisplay.style.transform = 'translateX(-50%) scale(1.1)';
         });
 
-        node.addEventListener('mouseleave', () => {
+        gate.addEventListener('mouseleave', () => {
             labelDisplay.textContent = 'Hover nodes to explore logic';
             labelDisplay.style.background = 'rgba(16, 185, 129, 0.1)';
             labelDisplay.style.borderColor = 'rgba(16, 185, 129, 0.4)';
@@ -900,13 +900,19 @@ function initNeuralGraph() {
         });
 
         // Click for "Neural Flare" effect
-        node.addEventListener('click', () => {
+        gate.addEventListener('click', () => {
+            const transform = gate.getAttribute('transform');
+            const match = transform ? transform.match(/translate\(([^,]+),\s*([^\)]+)\)/) : null;
+            if (!match) return;
+            const cx = match[1];
+            const cy = match[2];
+
             const flare = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-            flare.setAttribute("cx", node.getAttribute("cx"));
-            flare.setAttribute("cy", node.getAttribute("cy"));
+            flare.setAttribute("cx", cx);
+            flare.setAttribute("cy", cy);
             flare.setAttribute("r", "5");
             flare.setAttribute("fill", "#fff");
-            flare.innerHTML = `<animate attributeName="r" from="5" to="50" dur="0.8s" fill="freeze" />
+            flare.innerHTML = `<animate attributeName="r" from="5" to="120" dur="0.8s" fill="freeze" />
                                <animate attributeName="opacity" from="0.6" to="0" dur="0.8s" fill="freeze" />`;
             logicGraph.appendChild(flare);
             setTimeout(() => flare.remove(), 1000);

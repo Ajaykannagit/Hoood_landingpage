@@ -781,6 +781,92 @@ body {
 }
 
 /* --- Mind Graph Section --- */
+/* Intelligence 3.0 - Logic Gates & Bit-Streams */
+.logic-gate {
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.1));
+}
+
+.logic-gate:hover {
+    filter: drop-shadow(0 0 25px rgba(16, 185, 129, 0.4));
+    fill: rgba(16, 185, 129, 0.1);
+}
+
+.gate-highlight {
+    stroke-dasharray: 10, 5;
+    animation: dash 20s linear infinite;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 200;
+    }
+}
+
+.bit-stream-container {
+    opacity: 0.6;
+}
+
+.bit-bar {
+    fill: #10b981;
+    animation: bit-pulse var(--dur) ease-in-out infinite alternate;
+}
+
+@keyframes bit-pulse {
+    0% {
+        height: 2px;
+        transform: translateY(0);
+    }
+
+    100% {
+        height: 12px;
+        transform: translateY(-5px);
+    }
+}
+
+.data-trunk {
+    stroke: url(#neural-gradient);
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: 0.15;
+    filter: blur(1px);
+    transition: opacity 0.3s;
+}
+
+.logic-gate:hover~.data-trunk,
+.data-trunk:hover {
+    opacity: 0.6;
+}
+
+.gate-label-30 {
+    font-size: 14px;
+    font-weight: 900;
+    fill: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.heatmap-pulse {
+    animation: heat-glow 4s ease-in-out infinite;
+}
+
+@keyframes heat-glow {
+
+    0%,
+    100% {
+        fill-opacity: 0.05;
+        transform: scale(1);
+    }
+
+    50% {
+        fill-opacity: 0.15;
+        transform: scale(1.1);
+    }
+}
+
 .mind-graph-container {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -789,6 +875,7 @@ body {
     position: relative;
     box-shadow: inset 0 0 50px rgba(16, 185, 129, 0.05);
     margin-top: 2rem;
+    overflow: hidden;
 }
 
 .graph-node {
@@ -1563,6 +1650,7 @@ body {
 body.loading {
     overflow: hidden !important;
 }
+
 /* --- Prompt Lab Styles --- */
 #prompt-lab {
     background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #050505 100%);
@@ -1594,16 +1682,44 @@ body.loading {
     transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.ring-1 { width: 100%; height: 100%; animation: orbit 8s linear infinite; }
-.ring-2 { width: 80%; height: 80%; animation: orbit 12s linear infinite reverse; border-color: rgba(16, 185, 129, 0.1); }
-.ring-3 { width: 120%; height: 120%; animation: orbit 15s linear infinite; opacity: 0.3; }
+.ring-1 {
+    width: 100%;
+    height: 100%;
+    animation: orbit 8s linear infinite;
+}
 
-.engine-container:hover .ring-1 { transform: rotateX(60deg) rotateY(20deg) scale(1.1); border-color: rgba(16, 185, 129, 0.5); }
-.engine-container:hover .ring-2 { transform: rotateX(-40deg) rotateY(-30deg) scale(1.2); border-color: rgba(16, 185, 129, 0.4); }
+.ring-2 {
+    width: 80%;
+    height: 80%;
+    animation: orbit 12s linear infinite reverse;
+    border-color: rgba(16, 185, 129, 0.1);
+}
+
+.ring-3 {
+    width: 120%;
+    height: 120%;
+    animation: orbit 15s linear infinite;
+    opacity: 0.3;
+}
+
+.engine-container:hover .ring-1 {
+    transform: rotateX(60deg) rotateY(20deg) scale(1.1);
+    border-color: rgba(16, 185, 129, 0.5);
+}
+
+.engine-container:hover .ring-2 {
+    transform: rotateX(-40deg) rotateY(-30deg) scale(1.2);
+    border-color: rgba(16, 185, 129, 0.4);
+}
 
 @keyframes orbit {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .logic-particle {
@@ -1615,13 +1731,30 @@ body.loading {
     box-shadow: 0 0 10px #10b981;
 }
 
-.p1 { animation: particle-float 4s infinite; }
-.p2 { animation: particle-float 6s infinite 1s; }
-.p3 { animation: particle-float 5s infinite 2.5s; }
+.p1 {
+    animation: particle-float 4s infinite;
+}
+
+.p2 {
+    animation: particle-float 6s infinite 1s;
+}
+
+.p3 {
+    animation: particle-float 5s infinite 2.5s;
+}
 
 @keyframes particle-float {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0; }
-    50% { transform: translate(40px, -40px) scale(1.5); opacity: 1; }
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translate(40px, -40px) scale(1.5);
+        opacity: 1;
+    }
 }
 
 #optimized-card {
@@ -1638,12 +1771,29 @@ body.loading {
 }
 
 @keyframes text-glitch {
-    0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(-2px, -2px); }
-    60% { transform: translate(2px, 2px); }
-    80% { transform: translate(2px, -2px); }
-    100% { transform: translate(0); }
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
 }
 
 #optimized-prompt-text span {
@@ -1691,8 +1841,19 @@ body.loading {
 }
 
 @keyframes endpoint-pulse {
-    0%, 100% { transform-origin: center; transform: scale(1); filter: brightness(1); }
-    50% { transform-origin: center; transform: scale(1.1); filter: brightness(1.5); }
+
+    0%,
+    100% {
+        transform-origin: center;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    50% {
+        transform-origin: center;
+        transform: scale(1.1);
+        filter: brightness(1.5);
+    }
 }
 
 .graph-node {
@@ -1712,4 +1873,3 @@ body.loading {
 .graph-links:hover .graph-line {
     opacity: 0.4;
 }
-
