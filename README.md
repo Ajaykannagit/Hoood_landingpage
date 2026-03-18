@@ -2,7 +2,7 @@
 
 ![Hoood Logo](https://play-lh.googleusercontent.com/fHMTG2uVvBvY5w6Y4p1G1zG1vY1VvVvVvVvVvVvVvVvVvVvVvVvVvVvVvVvVvVvVvV=w240-h480-rw)
 
-**Hoood** is a high-performance, futuristic social network platform designed for AI engineers and prompt enthusiasts. It allows users to discover, remix, and deploy the world's most effective AI prompts in seconds.
+**Hoood** is a high-performance, futuristic social network platform designed for AI engineers and prompt enthusiasts. It allows users to discover remix, and deploy the world's most effective AI prompts in seconds.
 
 ## 🚀 Key Features
 
