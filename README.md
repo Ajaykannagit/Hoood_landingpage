@@ -15,7 +15,7 @@ A high-performance Canvas-based background with interactive click-burst ripples,
 ### 📼 Animated Multi-Step Flow
 A premium, horizontal stepper experience that guides users through the Hoood ecosystem with fluid transitions and real-time progress tracking.
 
-### 📂 Interactive 3D Folder
+### 📂 Interactive 3D Folder.
 A tactile, glassmorphism-based folder component in the discovery flow. Includes:
 - **3D Opening Animation**: Smoothly transitions to reveal layered content.
 - **Layered Paper Spreading**: Interactive papers that fan out upon opening.
